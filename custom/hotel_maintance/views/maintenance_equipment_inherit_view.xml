@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_equipment_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.equipment.view.form.inherit</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='next_action_date']" position="attributes">
+                <attribute name="readonly">0</attribute>
+                <attribute name="class">""</attribute>
+            </xpath>
+            <xpath expr="//field[@name='effective_date']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+
+            <xpath expr="//label[@for='period']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='assign_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='scrap_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='location']" position="attributes">
+                <attribute name="string">Location</attribute>
+            </xpath>
+            <xpath expr="//group[@name='maintenance']/div[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="partner_location"/>
+                <field name="equipment_no"/>
+            </xpath>
+            <xpath expr="//field[@name='owner_user_id']" position="after">
+                <field name="production"/>
+                <field name="discharge"/>
+            </xpath>
+            <xpath expr="//field[@name='technician_user_id']" position="after">
+                <field name="type_of_cable"/>
+            </xpath>
+
+            <xpath expr="//page[2]" position="after">
+                <page string="Product Specification">
+                    <group col="4">
+                        <field name="electric_volt"/>
+                        <field name="electric_current"/>
+                        <field name="electric_phase"/>
+                        <field name="electric_power"/>
+                    </group>
+                </page>
+            </xpath>
+
+
+        </field>
+    </record>
+
+</odoo>

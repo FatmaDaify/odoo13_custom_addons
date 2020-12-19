@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="order_acknowledgement_report"
+                string="Order Acknowledgement"
+                model="sale.order"
+                report_type="qweb-pdf"
+                file="sale_custom_reports.report_order_acknowledgement"
+                name="sale_custom_reports.report_order_acknowledgement"
+                print_report_name="'Order Acknowledgement - %s' % (object.name)"
+        />
+
+        <template id="report_order_acknowledgement">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="sale_custom_reports.report_order_acknowledgement_document" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_order_acknowledgement_document">
+            <t t-call="sale_custom_reports.custom_external_layout">
+                <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div>
+                    <strong>To:</strong>
+                    <div t-field="doc.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                </div>
+                <br/>
+                <br/>
+                <div class="text-center" style="font-size:16pt;">
+                    <strong>
+                        <span>Order Acknowledgement</span>
+                    </strong>
+                </div>
+
+
+                <div class="row mt32" id="informations">
+                    <div class="col-3">
+                        <strong>Acknowledgement No.</strong>
+                        <span>SIE-SH-OA-</span>
+                        <span t-field="doc.name"/>
+                    </div>
+
+                    <div class="col-3">
+                        <strong>Your Reference</strong>
+                        <p class="m-0" t-field="doc.client_order_ref"/>
+                    </div>
+
+                    <div class="col-3">
+                        <strong>Acknowledgement Date</strong>
+                        <p class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'/>
+                    </div>
+
+                    <div class="col-3">
+                        <strong>Salesperson</strong>
+                        <p class="m-0" t-field="doc.user_id"/>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div>
+                    <span>Your Order:</span>
+                    <p/>
+                    <strong>
+                        <p t-field="doc.client_order_ref"/>
+                    </strong>
+                    <span>has been received.</span>
+                    <p/>
+                    <p>
+                        <span>We will shortly come back to you and confirm your order with delivery time.</span>
+                    </p>
+                </div>
+
+
+            </t>
+        </template>
+
+    </data>
+</odoo>

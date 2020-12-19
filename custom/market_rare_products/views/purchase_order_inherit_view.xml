@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_order_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <create name="add_product_control" position="after">
+                    <create name="add_rare_product_control" string="Add from rare list"
+                            context="{'default_display_type': 'rare_list'}"/>
+
+                </create>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="attrs">{
+                        'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))],
+                        'required': [('display_type', 'in', [False,'rare_list'])],
+                        }
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="hotel_configuration_menu"
+                  parent="maintenance.menu_maintenance_configuration"
+                  name="Hotel"
+                  sequence="25"/>
+
+        <menuitem id="hotel_floor_menu"
+                  parent="hotel_configuration_menu"
+                  action="hotel_floor_action"
+                  name="Floors"
+                  sequence="1"/>
+
+        <menuitem id="hotel_room_menu"
+                  parent="hotel_configuration_menu"
+                  action="hotel_room_action"
+                  string="Rooms"
+                  sequence="2"/>
+
+    </data>
+</odoo>

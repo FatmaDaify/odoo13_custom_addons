@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="custom_external_layout_standard">
+            <div t-attf-class="header o_company_#{company.id}_layout">
+                <div class="row">
+                    <div class="col-4"/>
+                    <div class="col-4"/>
+                    <div class="col-5">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="max-height: 75px;margin-left:15px;"
+                             alt="Logo"/>
+                    </div>
+                </div>
+                <p/>
+                <div class="row">
+                    <div class="col-8"/>
+                    <div class="col-5">
+                        <div class="text-left" style="margin-left:5px;font-size: 12pt;  color: black;">
+                            <strong>Seidel Industrial Equipment Co., Ltd.</strong>
+                        </div>
+                        <div class="text-left" style="margin-left:5px;font-size: 12pt;">Unit B2, 15/F, Phase 1,
+                            Superluck
+                        </div>
+                        <div class="text-left" style="margin-left:5px;font-size: 12pt;">Industrial Centre 45-53, Sha
+                            Tsui Road
+                        </div>
+                        <div class="text-left" style="margin-left:5px;font-size: 12pt;">Tsuen Wan NT. - Hong Kong</div>
+                        <div class="row mt16"></div>
+                        <div class="text-left" style="margin-left:5px;font-size: 12pt;">Contact:
+                            <span class="col-xs-pull-2" t-field="user.name"/>
+                        </div>
+                        <div class="text-left" style="margin-left:5px;font-size: 12pt;">Phone:
+                            <span class="col-xs-pull-2" t-field="company.phone"/>
+                        </div>
+                        <div class="text-left" style="margin-left:5px;font-size: 12pt;">E-mail:
+                            <span class="col-xs-pull-2" t-field="user.email"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-xs-12"/>
+                <div class="row mt32">
+                    <div class="col-7">
+                        <div class="text-left" style="font-size: 7pt;">
+                            Seidel Industrial Equipment Co., Ltd. C1, 1000 Jiu Jing Road, Jiu Ting County, Song
+                            Jiang
+                            District, 201615 Shanghai
+                        </div>
+                        <div class="text-left" style="border-top: 1px solid black;"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+                 t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+
+                <div style="border-top: 1px solid black;">
+                    <ul class="list-inline text-left" style="font-size: 8pt;">
+                        <li style="display:inline;">This document is based on our General Terms and Conditions. For
+                            further information please
+                            contact us:
+                        </li>
+                    </ul>
+                    <ul class="list-inline text-left" style="font-size: 8pt;">
+                        <li>Bank Information: DBS Bank (Hong Kong) Limited, 11th Floor, The Center, 99 Queen's Road
+                            Central,
+                            Hong Kong
+                        </li>
+                        <li>USD Account: Seidel Industrial Equipment Co., Ltd., DBS Bank (Hong Kong) Ltd., SWIFT CODE:
+                            DHBKHKHH, Account: 7802737470
+                        </li>
+                    </ul>
+                    <div style="font-size: 8pt;" class="text-center" t-if="report_type == 'pdf'">
+                        Page:
+                        <span class="page"/>
+                        of
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+
+
+        <template id="custom_external_layout" inherit_id="web.external_layout" primary="True">
+            <xpath expr="//t[@t-if='company.external_report_layout_id']" position="replace">
+                <t t-if="company.external_report_layout_id"
+                   t-call="sale_custom_reports.custom_external_layout_standard">
+                    <t t-raw="0"/>
+                </t>
+            </xpath>
+
+            <xpath expr="//t[@t-call='web.external_layout_standard']" position="replace">
+                <t t-else="else" t-call="sale_custom_reports.custom_external_layout_standard">
+                    <t t-raw="0"/>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

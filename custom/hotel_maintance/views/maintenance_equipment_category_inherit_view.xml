@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_equipment_category_view_form_parent_inherit" model="ir.ui.view">
+        <field name="name">hr.equipment.category.view.form.parent.inherit</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[1]" position="replace">
+                <group col="4">
+                    <field name="parent_id"/>
+                    <field name="technician_user_id"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="hr_equipment_category_view_tree_parent_inherit" model="ir.ui.view">
+        <field name="name">hr.equipment.category.view.tree.parent.inherit</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="parent_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
